@@ -1,7 +1,8 @@
 plugins {
     id 'org.springframework.boot' version '2.6.0-SNAPSHOT'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+    id 'groovy'
+    id 'application'
 }
 
 group = 'com.example'
@@ -15,14 +16,12 @@ repositories {
 }
 
 dependencies {
+    compile 'org.codehaus.groovy:groovy-all:3.0.9'
+
+    compile(project(':ast'))
+
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 }
 
 test {
