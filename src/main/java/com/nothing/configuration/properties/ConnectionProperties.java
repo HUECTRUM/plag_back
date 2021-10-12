@@ -7,4 +7,5 @@ import lombok.Data;
 @Data //LOMBOK PLZ (https://github.com/projectlombok/lombok/issues/557) :(
 public class ConnectionProperties {
     public String url;
+    public String key;
 }
