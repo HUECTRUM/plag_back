@@ -1,16 +1,13 @@
 package com.nothing
 
 import com.nothing.annotations.springcomponents.InjectableComponent
-import com.nothing.http.FaceitDataApi
-import com.nothing.service.MatchHttpFetcher
-import com.nothing.service.StatsCollectorService
-import org.apache.groovy.json.internal.LazyMap
+import com.nothing.service.StatsCollector
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 
 @InjectableComponent
 class Test {
-    public final StatsCollectorService statsCollectorService
+    public final StatsCollector statsCollectorService
 
     @EventListener(ApplicationReadyEvent.class)
     void go() {
