@@ -12,9 +12,15 @@ class FaceitDataApi {
     }
 
     def getPlayerData(String playerId) {
-        return [
-                client.executeBlockingGet("players/$playerId"),
-                client.executeBlockingGet("players/$playerId/stats/csgo")
-        ]
+        return client.executeBlockingGet("players/$playerId")
+    }
+
+    def getPlayerStats(String playerId) {
+        return client.executeBlockingGet("players/$playerId/stats/csgo")
+    }
+
+    def getTeamData(List<String> playerIds) {
+        return [playerIds.collect { String id -> getPlayerData(id) },
+                playerIds.collect { String id -> getPlayerStats(id) }]
     }
 }

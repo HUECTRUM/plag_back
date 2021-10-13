@@ -21,7 +21,7 @@ dependencies {
     compile(project(':ast'))
 
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
 }
 
 test {
