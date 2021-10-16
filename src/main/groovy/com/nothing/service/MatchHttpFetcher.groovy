@@ -10,16 +10,14 @@ class MatchHttpFetcher {
     def fullApiInfo(String matchId) {
         def matchData = faceitDataApi.getMatch(matchId) as Map<String, ?>
 
-        def (team1Data, team2Data) = ["faction1", "faction2"].collect {
-            String fName -> getPlayerIds(matchData, fName)
-        }.collect {
-            List<String> playerIds -> faceitDataApi.getTeamData(playerIds)
-        }
+        def (team1Data, team2Data) = ['faction1', 'faction2']
+                .collect { getPlayerIds(matchData, it) }
+                .collect { faceitDataApi.getTeamData(it) }
 
         return [matchData, team1Data, team2Data]
     }
 
     List<String> getPlayerIds(Map<String, ?> matchData, String factionName) {
-        return matchData.teams[factionName].roster.collect { pInfo -> pInfo['player_id'] } as List<String>
+        return matchData.teams[factionName].roster.collect { it['player_id'] } as List<String>
     }
 }

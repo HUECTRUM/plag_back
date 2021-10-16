@@ -15,11 +15,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME
 @Retention(RUNTIME)
 @Configuration
 @ConfigurationProperties
-@PropertySource("")
+@PropertySource('')
 @interface ConfigProperty {
-    @AliasFor(annotation = ConfigurationProperties, attribute = "prefix")
-    String value() default "";
+    @AliasFor(annotation = ConfigurationProperties, attribute = 'prefix')
+    String value() default '';
 
-    @AliasFor(annotation = PropertySource, attribute = "value")
-    String sourceFile() default "classpath:application.properties";
+    @AliasFor(annotation = PropertySource, attribute = 'value')
+    String sourceFile() default 'classpath:application.properties';
 }

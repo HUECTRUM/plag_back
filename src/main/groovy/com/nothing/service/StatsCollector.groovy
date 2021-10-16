@@ -6,23 +6,18 @@ import com.nothing.annotations.springcomponents.InjectableService
 class StatsCollector {
     public final MatchHttpFetcher matchHttpFetcher
 
-    def collectStatsByMap(String matchId) {
-        def (_, t1Info, t2Info) = matchHttpFetcher.fullApiInfo(matchId)
+    def collectStatsByMap(List t1Info, List t2Info) {
         def statsResponse = [t1Info, t2Info].collect { List<?> info -> info[1] }
 
-        def groupedByMap = statsResponse.collect {
-            teamStats -> getSegments(teamStats)
-        }.collect {
-            teamSegment -> teamSegment.groupBy({ Map<String, ?> segment -> segment.label })
-        }
-        return groupedByMap
+        return statsResponse
+                .collect { getSegments(it) }
+                .collect { it.groupBy({ Map<String, ?> segment -> segment.label }) }
     }
 
-    def getSegments(List<Map> teamStats) {
-        return teamStats.collect {
-            Map<String, ?> stats -> stats.segments
-        }.flattenOnce().findAll {
-            Map<String, ?> segments -> segments.type == 'Map' && segments.mode == '5v5'
-        }
+    def getSegments(List<Map<String, ?>> teamStats) {
+        return teamStats
+                .collect { it.segments }
+                .flattenOnce()
+                .findAll { it.type == 'Map' && it.mode == '5v5' }
     }
 }

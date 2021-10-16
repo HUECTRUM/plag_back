@@ -15,8 +15,8 @@ class WebClientConfig {
     WebClient dataClient() {
         return WebClient.builder()
                 .baseUrl(connectionProperties.url)
-                .defaultHeader("accept", "application/json")
-                .defaultHeader("Authorization", format("Bearer %s", connectionProperties.key))
+                .defaultHeader('accept', 'application/json')
+                .defaultHeader('Authorization', format('Bearer %s', connectionProperties.key))
                 .build()
     }
 }

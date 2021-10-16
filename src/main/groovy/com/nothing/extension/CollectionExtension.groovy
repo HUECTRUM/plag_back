@@ -2,13 +2,13 @@ package com.nothing.extension
 
 class CollectionExtension {
     static <T> Collection<T> flattenOnce(final Collection<T> collection) {
-        return flattenOnceResursive(collection, [], 0)
+        return flattenOnceRecursive(collection, [], 0)
     }
 
-    private static Collection flattenOnceResursive(Iterable collection, Collection res, int depth) {
+    private static Collection flattenOnceRecursive(Iterable collection, Collection res, int depth) {
         collection.each { element ->
             if (element instanceof Collection && !depth) {
-                flattenOnceResursive(element as Collection, res, depth + 1)
+                flattenOnceRecursive(element as Collection, res, depth + 1)
             } else {
                 res << element
             }

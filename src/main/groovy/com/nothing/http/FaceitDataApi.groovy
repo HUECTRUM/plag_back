@@ -20,7 +20,6 @@ class FaceitDataApi {
     }
 
     def getTeamData(List<String> playerIds) {
-        return [playerIds.collect { String id -> getPlayerData(id) },
-                playerIds.collect { String id -> getPlayerStats(id) }]
+        return [playerIds.collect { getPlayerData(it) }, playerIds.collect { getPlayerStats(it) }]
     }
 }
