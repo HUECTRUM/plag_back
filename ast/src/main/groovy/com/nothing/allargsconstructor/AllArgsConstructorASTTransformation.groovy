@@ -18,14 +18,12 @@ class AllArgsConstructorASTTransformation extends AbstractASTTransformation {
     void visit(ASTNode[] nodes, SourceUnit source) {
         def cNode = nodes[1] as ClassNode
 
-        def paramsList = getInstanceNonPropertyFields(cNode).findAll { fNode ->
-            fNode.type.name != 'groovy.lang.MetaClass'
-        }.collect { fNode ->
-            new Parameter(fNode.type, fNode.name)
-        }
+        def paramsList = getInstanceNonPropertyFields(cNode)
+                .findAll { it.type.name != 'groovy.lang.MetaClass' }
+                .collect { new Parameter(it.type, it.name) }
 
         final BlockStatement body = paramsList.inject(new BlockStatement()) { bS, param ->
-            bS.addStatement(assignS(propX(varX("this"), param.name), varX(param))); bS //todo: macro?
+            bS.addStatement(assignS(propX(varX('this'), param.name), varX(param))); bS
         }
 
         cNode.addConstructor new ConstructorNode(ACC_PUBLIC, paramsList as Parameter[], EMPTY_ARRAY, body)
