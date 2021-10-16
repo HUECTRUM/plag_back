@@ -15,7 +15,7 @@ class StatsProcessor {
     }
 
     def processSingleMapStats(List<Map<String, ?>> mapStats, String field) {
-        return mapStats.inject(0) { sum, entry -> sum + (entry.stats[field] as double) * (entry.stats.Matches as double) } /
-                mapStats.inject(0) { sum, entry -> sum + (entry.stats.Matches as double) }
+        return mapStats.sum { (it.stats[field] as double) * (it.stats.Matches as double) } /
+                mapStats.sum { it.stats.Matches as double }
     }
 }
