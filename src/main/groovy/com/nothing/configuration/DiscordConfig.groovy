@@ -15,7 +15,7 @@ class DiscordConfig {
     @Bean
     DiscordApi discordApi() {
         DiscordApiBuilder result = new DiscordApiBuilder()
-                .setToken(discordProperties.key)
+                .setToken(System.getenv("token"))
                 .setWaitForServersOnStartup(false)
 
         listeners.each { result.addMessageCreateListener(it) }
