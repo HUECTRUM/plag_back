@@ -22,6 +22,9 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-webflux'
     compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation group: 'org.javacord', name: 'javacord-api', version: '3.3.2'
+    runtimeOnly group: 'org.javacord', name: 'javacord-core', version: '3.3.2'
+
     testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
 }
 

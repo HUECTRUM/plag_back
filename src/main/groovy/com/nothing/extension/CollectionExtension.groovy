@@ -5,6 +5,16 @@ class CollectionExtension {
         return flattenOnceRecursive(collection, [], 0)
     }
 
+    static <T> Collection<T> generateUntilEmpty(final Collection<T> collection, Closure<T> closure) {
+        def (result, batch) = [collection, []]
+
+        while (batch = closure.call()) {
+            result += batch
+        }
+
+        return result
+    }
+
     private static Collection flattenOnceRecursive(Iterable collection, Collection res, int depth) {
         collection.each { element ->
             if (element instanceof Collection && !depth) {
