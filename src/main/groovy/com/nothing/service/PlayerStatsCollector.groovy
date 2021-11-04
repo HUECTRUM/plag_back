@@ -14,6 +14,6 @@ class PlayerStatsCollector {
     def getMatchLevel(Map match, String playerId) {
         return (match.teams.faction1.players + match.teams.faction2.players)
                 .find {it.player_id == playerId}
-                .skill_level
+                ?.skill_level ?: 0
     }
 }
