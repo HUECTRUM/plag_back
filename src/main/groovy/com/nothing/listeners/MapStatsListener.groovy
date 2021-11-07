@@ -6,13 +6,12 @@ import com.nothing.service.response.MatchResponseService
 import org.javacord.api.entity.message.MessageBuilder
 import org.javacord.api.entity.message.embed.EmbedBuilder
 import org.javacord.api.event.message.MessageCreateEvent
-import org.javacord.api.listener.message.MessageCreateListener
 
 import static com.nothing.utils.ColorUtils.generateRandomColor
 import static com.nothing.utils.ResourceUtils.getResourceFile
 
 @InjectableComponent
-class MapStatsListener implements MessageCreateListener {
+class MapStatsListener extends KeywordListener {
     private static final def mapPool =
             ['de_dust2', 'de_mirage', 'de_train', 'de_ancient', 'de_overpass', 'de_nuke', 'de_vertigo', 'de_inferno']
     private static final def shortenedStatNames = [
@@ -25,13 +24,8 @@ class MapStatsListener implements MessageCreateListener {
     public final MatchResponseService matchResponseService
 
     @Override
-    void onMessageCreate(MessageCreateEvent event) {
-        def msgWords = event.messageContent.split("\\s+")
-        if (!msgWords[0].equalsIgnoreCase(".mapstats")) {
-            return
-        }
-
-        def response = matchResponseService.getMatchResponse(msgWords[1])
+    def process(MessageCreateEvent event, List<String> params) {
+        def response = matchResponseService.getMatchResponse(params[0])
 
         def team1Name = response.matchData.teams.faction1.name
         def team2Name = response.matchData.teams.faction2.name
@@ -42,7 +36,7 @@ class MapStatsListener implements MessageCreateListener {
             }
 
             new MessageBuilder().setEmbed(new EmbedBuilder()
-                    .setTitle("${map} stats for match ${msgWords[1][-4..-1]}")
+                    .setTitle("${map} stats for match ${params[0][-4..-1]}")
                     .setDescription(msg)
                     .setThumbnail(getResourceFile("pics/map_icon_${map}.png"))
                     .setColor(generateRandomColor())
@@ -57,5 +51,10 @@ class MapStatsListener implements MessageCreateListener {
         def statDiff = t1Stat > t2Stat ? "${t1Str.discordBoldItalic()}/$t2Str" : "$t1Str/${t2Str.discordBoldItalic()}"
 
         return "${shortenedStatNames[stat]}: $statDiff" + '\r\n'
+    }
+
+    @Override
+    def commandName() {
+        return '.mapstats'
     }
 }
