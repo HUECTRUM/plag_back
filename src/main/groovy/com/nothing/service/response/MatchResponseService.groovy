@@ -16,7 +16,7 @@ class MatchResponseService {
         return [
                 matchData: matchData,
                 team1Info: team1Data[0], team2Info: team2Data[0],
-                team1Stats: t1stats, team2Stats: t2stats
+                team1Stats: t1stats.withDefault{[:].withDefault {0.0}}, team2Stats: t2stats.withDefault{[:].withDefault {0.0}}
         ]
     }
 }
