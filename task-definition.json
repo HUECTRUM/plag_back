@@ -55,7 +55,7 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-2:908484539917.:task-definition/faceitapihelper:2",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-2:908484539917:task-definition/faceitapihelper:2",
   "family": "faceitapihelper",
   "requiresAttributes": [
     {
