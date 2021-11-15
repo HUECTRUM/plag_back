@@ -13,9 +13,9 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11.0.3
-      - uses: eskatos/gradle-command-action@v1
+      - uses: eskatos/gradle-command-action@v2
         with:
-          gradle-version: current
+          gradle-version: 6.9.1
           arguments: build -PTOKEN=${{ secrets.TOKEN }}
 
       - uses: aws-actions/configure-aws-credentials@v1
