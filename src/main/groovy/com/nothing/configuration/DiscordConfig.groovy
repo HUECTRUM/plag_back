@@ -14,6 +14,8 @@ class DiscordConfig {
 
     @Bean
     DiscordApi discordApi() {
+        println("TOKEN " + getenv("token"))
+        println("ALL ARGS " + getenv())
         DiscordApiBuilder result = new DiscordApiBuilder()
                 .setToken(getenv("token"))
                 .setWaitForServersOnStartup(false)
