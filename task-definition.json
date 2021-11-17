@@ -5,7 +5,14 @@
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "faceithelper-logs",
+          "awslogs-region": "us-east-2",
+          "awslogs-stream-prefix": "helperlogs"
+        }
+      },
       "entryPoint": null,
       "portMappings": [
         {
