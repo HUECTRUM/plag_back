@@ -5,6 +5,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder
 import org.javacord.api.event.message.MessageCreateEvent
 
 import static com.nothing.utils.ColorUtils.generateRandomColor
+import static com.nothing.utils.ResourceUtils.getResourceFile
 
 @InjectableComponent
 class EmbedPingListener extends KeywordListener {
@@ -14,6 +15,7 @@ class EmbedPingListener extends KeywordListener {
                 .setAuthor(event.messageAuthor)
                 .setTitle('Embed ping response')
                 .setDescription('Embed pong')
+                .setThumbnail(getResourceFile("pics/faceit3.png"))
                 .setColor(generateRandomColor())
         )
     }
