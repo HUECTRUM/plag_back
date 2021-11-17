@@ -9,6 +9,7 @@ class HelpListener extends KeywordListener {
     ```Available commands:
      .maxlvl <player_name> - max level the player has reached
      .mapstats <room_id> - team stats for a matchmaking lobby
+    ```
     """
 
     @Override
