@@ -10,7 +10,7 @@
         "options": {
           "awslogs-group": "faceithelper-logs",
           "awslogs-region": "us-east-2",
-          "awslogs-stream-prefix": "helperlogs"
+          "awslogs-stream-prefix": "helper-logs"
         }
       },
       "entryPoint": null,
