@@ -8,7 +8,6 @@ import org.javacord.api.entity.message.embed.EmbedBuilder
 import org.javacord.api.event.message.MessageCreateEvent
 
 import static com.nothing.utils.ColorUtils.generateRandomColor
-import static com.nothing.utils.ResourceUtils.getResourceFile
 
 @InjectableComponent
 class MapStatsListener extends KeywordListener {
@@ -38,7 +37,6 @@ class MapStatsListener extends KeywordListener {
             new MessageBuilder().setEmbed(new EmbedBuilder()
                     .setTitle("${map} stats for match ${params[0][-4..-1]}")
                     .setDescription(msg)
-                    .setThumbnail(getResourceFile("pics/map_icon_${map}.png"))
                     .setColor(generateRandomColor())
             ).send(event.channel)
         }

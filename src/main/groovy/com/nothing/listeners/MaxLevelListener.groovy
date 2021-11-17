@@ -8,7 +8,6 @@ import org.javacord.api.entity.message.embed.EmbedBuilder
 import org.javacord.api.event.message.MessageCreateEvent
 
 import static com.nothing.utils.ColorUtils.generateRandomColor
-import static com.nothing.utils.ResourceUtils.getResourceFile
 
 @InjectableComponent
 @Slf4j
@@ -24,7 +23,6 @@ class MaxLevelListener extends KeywordListener {
                 .setAuthor(event.messageAuthor)
                 .setTitle('Max faceit level')
                 .setDescription("Player ${params[0]} has reached lvl $level")
-                .setThumbnail(getResourceFile("pics/faceit${level}.png"))
                 .setColor(generateRandomColor())
         ).send(event.channel)
     }
