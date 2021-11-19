@@ -17,7 +17,7 @@ class StatsProcessor {
     def processSingleMapStats(List<Map<String, ?>> mapStats, String field) {
         def totalMatches = mapStats.sum { it.stats.Matches as double }
 
-        return field == 'Matches'
+        return field != 'Matches'
                 ? mapStats.sum { (it.stats[field] as double) * (it.stats.Matches as double) } / totalMatches
                 : totalMatches
     }
