@@ -10,6 +10,6 @@ import org.javacord.api.listener.message.MessageCreateListener
 class LogMessagesListener implements MessageCreateListener {
     @Override
     void onMessageCreate(MessageCreateEvent event) {
-        log.info("Message received {}", event.messageContent)
+        log.info('Message received {}', event.messageContent)
     }
 }

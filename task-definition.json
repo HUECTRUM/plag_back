@@ -9,41 +9,21 @@
           "awslogs-stream-prefix": "helper-logs"
         }
       },
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "protocol": "tcp",
-          "containerPort": 9090
-        }
-      ],
-      "cpu": 0,
-      "environment": [],
-      "mountPoints": [],
+      "portMappings": [{"hostPort": 80, "protocol": "tcp", "containerPort": 9090}],
       "memoryReservation": 500,
-      "volumesFrom": [],
       "image": "908484539917.dkr.ecr.us-east-2.amazonaws.com/faceitapihelper:latest",
       "name": "faceitapihelper-container"
     }
   ],
-  "placementConstraints": [],
-  "compatibilities": [
-    "EC2"
-  ],
+  "compatibilities": ["EC2"],
   "taskDefinitionArn": "arn:aws:ecs:us-east-2:908484539917:task-definition/faceitapihelper:2",
   "family": "faceitapihelper",
   "requiresAttributes": [
-    {
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
-    }
+    {"name": "com.amazonaws.ecs.capability.ecr-auth"},
+    {"name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"}
   ],
-  "requiresCompatibilities": [
-    "EC2"
-  ],
+  "requiresCompatibilities": ["EC2"],
   "networkMode": "bridge",
   "revision": 2,
-  "status": "ACTIVE",
-  "volumes": []
+  "status": "ACTIVE"
 }

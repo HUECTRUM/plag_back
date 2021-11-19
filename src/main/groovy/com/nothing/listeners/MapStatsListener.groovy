@@ -17,7 +17,8 @@ class MapStatsListener extends KeywordListener {
             'Average K/D Ratio': 'K/D',
             'Average Kills': 'Kills',
             'Average K/R Ratio': 'K/R',
-            'Win Rate %': 'Win%'
+            'Win Rate %': 'Win%',
+            'Matches': 'Matches'
     ]
 
     public final MatchResponseService matchResponseService

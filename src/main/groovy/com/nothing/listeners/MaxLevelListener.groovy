@@ -17,7 +17,6 @@ class MaxLevelListener extends KeywordListener {
     @Override
     def process(MessageCreateEvent event, List<String> params) {
         def level = playerStatsCollector.getPlayerMaxlvl(params[0])
-        log.info("Found level for player {} - {}", params[0], level)
 
         new MessageBuilder().setEmbed(new EmbedBuilder()
                 .setAuthor(event.messageAuthor)

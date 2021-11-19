@@ -4,7 +4,7 @@ import com.nothing.annotations.springcomponents.InjectableService
 
 @InjectableService
 class StatsProcessor {
-    public static final def statFields = ['Average K/D Ratio', 'Average Kills', 'Average K/R Ratio', 'Win Rate %']
+    public static final def statFields = ['Average K/D Ratio', 'Average Kills', 'Average K/R Ratio', 'Win Rate %', 'Matches']
 
     def processSingleMatchStats(Map<String, List<Map<String, ?>>> matchStats) {
         return matchStats.collectEntries { key, value -> [key, processSingleMapStats(value)] }
@@ -15,7 +15,10 @@ class StatsProcessor {
     }
 
     def processSingleMapStats(List<Map<String, ?>> mapStats, String field) {
-        return mapStats.sum { (it.stats[field] as double) * (it.stats.Matches as double) } /
-                mapStats.sum { it.stats.Matches as double }
+        def totalMatches = mapStats.sum { it.stats.Matches as double }
+
+        return field == 'Matches'
+                ? mapStats.sum { (it.stats[field] as double) * (it.stats.Matches as double) } / totalMatches
+                : totalMatches
     }
 }
