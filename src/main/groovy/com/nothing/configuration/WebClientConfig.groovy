@@ -2,27 +2,35 @@ package com.nothing.configuration
 
 import com.nothing.annotations.springcomponents.InjectableConfiguration
 import com.nothing.configuration.properties.ConnectionProperties
+import com.nothing.configuration.properties.SteamProperties
 import org.springframework.context.annotation.Bean
-import org.springframework.web.reactive.function.client.ExchangeStrategies
+import org.springframework.context.annotation.Primary
 import org.springframework.web.reactive.function.client.WebClient
 
+import static com.nothing.utils.WebClientUtils.buildWebClient
 import static java.lang.String.format
 
 @InjectableConfiguration
 class WebClientConfig {
     public final ConnectionProperties connectionProperties
+    public final SteamProperties steamProperties
 
     @Bean
+    @Primary
     WebClient dataClient() {
-        return WebClient.builder()
-                .exchangeStrategies(ExchangeStrategies.builder()
-                        .codecs(configurer -> configurer
-                                .defaultCodecs()
-                                .maxInMemorySize(16 * 1024 * 1024))
-                        .build()
-                ).baseUrl(connectionProperties.url)
-                .defaultHeader('accept', 'application/json')
-                .defaultHeader('Authorization', format('Bearer %s', connectionProperties.key))
-                .build()
+        return buildWebClient(connectionProperties.url, [
+                accept       : 'application/json',
+                Authorization: format('Bearer %s', connectionProperties.key)
+        ])
+    }
+
+    @Bean
+    WebClient v1Client() {
+        return buildWebClient(connectionProperties.oldUrl, [:])
+    }
+
+    @Bean
+    WebClient steamClient() {
+        return buildWebClient(steamProperties.apiurl, [:])
     }
 }

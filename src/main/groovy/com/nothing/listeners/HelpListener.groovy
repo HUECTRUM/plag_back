@@ -9,6 +9,7 @@ class HelpListener extends KeywordListener {
     ```Available commands:
      .maxlvl <player_name> - max level the player has reached
      .mapstats <room_id> - team stats for a matchmaking lobby
+     .findfaceit <steam_link_id> - find faceit account by steam id
     ```
     """
 

@@ -1,9 +1,10 @@
-package com.nothing.service
+package com.nothing.service.response
 
 import com.nothing.annotations.springcomponents.InjectableService
+import com.nothing.service.http.PlayerHttpFetcher
 
 @InjectableService
-class PlayerStatsCollector {
+class PlayerStatsResponseService {
     public final PlayerHttpFetcher playerHttpFetcher
 
     def getPlayerMaxlvl(String playerName) {

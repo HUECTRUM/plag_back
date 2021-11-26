@@ -1,4 +1,4 @@
-package com.nothing.service
+package com.nothing.service.http
 
 import com.nothing.annotations.springcomponents.InjectableService
 import com.nothing.http.FaceitDataApi

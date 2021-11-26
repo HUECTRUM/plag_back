@@ -1,8 +1,8 @@
 package com.nothing.service.response
 
 import com.nothing.annotations.springcomponents.InjectableService
-import com.nothing.service.MatchHttpFetcher
-import com.nothing.service.StatsProcessorAggregator
+import com.nothing.service.http.MatchHttpFetcher
+import com.nothing.service.matchstats.StatsProcessorAggregator
 
 @InjectableService
 class MatchResponseService {

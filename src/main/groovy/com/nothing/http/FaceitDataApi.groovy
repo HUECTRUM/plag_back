@@ -8,22 +8,26 @@ import static java.lang.System.currentTimeMillis
 
 @InjectableService
 class FaceitDataApi {
-    public final WebClient client
+    public final Map<String, WebClient> clients
+
+    def getPlayerBySteamId(String steamId) {
+        return clients.v1Client.executeBlockingGet("/?limit=1&query=$steamId")
+    }
 
     def getMatch(String matchId) {
-        return client.executeBlockingGet("matches/$matchId")
+        return clients.dataClient.executeBlockingGet("matches/$matchId")
     }
 
     def getPlayerByName(String playername) {
-        return client.executeBlockingGet("/players?nickname=$playername&game=csgo")
+        return clients.dataClient.executeBlockingGet("/players?nickname=$playername&game=csgo")
     }
 
     def getPlayerData(String playerId) {
-        return client.executeBlockingGet("players/$playerId")
+        return clients.dataClient.executeBlockingGet("players/$playerId")
     }
 
     def getPlayerStats(String playerId) {
-        return client.executeBlockingGet("players/$playerId/stats/csgo")
+        return clients.dataClient.executeBlockingGet("players/$playerId/stats/csgo")
     }
 
     def getTeamData(List<String> playerIds) {
@@ -34,7 +38,7 @@ class FaceitDataApi {
         long maxTimestamp = currentTimeMillis() / 1000L
 
         return [].generateUntilEmpty {
-            def batch = client.executeBlockingGet("/players/$playerId/history?game=csgo&from=1325376000&to=$maxTimestamp&limit=100")
+            def batch = clients.dataClient.executeBlockingGet("/players/$playerId/history?game=csgo&from=1325376000&to=$maxTimestamp&limit=100")
                     .items
                     .sort { it.started_at }
 

@@ -1,4 +1,4 @@
-package com.nothing.service
+package com.nothing.service.matchstats
 
 import com.nothing.annotations.springcomponents.InjectableService
 

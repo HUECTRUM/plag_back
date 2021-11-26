@@ -1,14 +1,12 @@
 package com.nothing
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import com.nothing.annotations.ApplicationStarter
 
 import static org.springframework.boot.SpringApplication.run
 
-@SpringBootApplication
-@EnableConfigurationProperties
+@ApplicationStarter
 class AppEntrypoint {
     static void main(String[] args) {
-        run AppEntrypoint
+        run(AppEntrypoint)
     }
 }

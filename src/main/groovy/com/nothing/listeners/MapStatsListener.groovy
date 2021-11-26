@@ -1,7 +1,7 @@
 package com.nothing.listeners
 
 import com.nothing.annotations.springcomponents.InjectableComponent
-import com.nothing.service.StatsProcessor
+import com.nothing.service.matchstats.StatsProcessor
 import com.nothing.service.response.MatchResponseService
 import org.javacord.api.entity.message.MessageBuilder
 import org.javacord.api.entity.message.embed.EmbedBuilder
@@ -13,6 +13,7 @@ import static com.nothing.utils.ColorUtils.generateRandomColor
 class MapStatsListener extends KeywordListener {
     private static final def mapPool =
             ['de_dust2', 'de_mirage', 'de_train', 'de_ancient', 'de_overpass', 'de_nuke', 'de_vertigo', 'de_inferno']
+
     private static final def shortenedStatNames = [
             'Average K/D Ratio': 'K/D',
             'Average Kills': 'Kills',
