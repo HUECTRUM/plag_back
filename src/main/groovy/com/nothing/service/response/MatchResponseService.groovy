@@ -10,7 +10,9 @@ class MatchResponseService {
     public final StatsProcessorAggregator statsProcessorAggregator
 
     def getMatchResponse(String matchId) {
-        def (matchData, team1Data, team2Data) = matchHttpFetcher.fullApiInfo(matchId)
+        def matchIdParsed = matchId.tokenize('/').last()
+
+        def (matchData, team1Data, team2Data) = matchHttpFetcher.fullApiInfo(matchIdParsed)
         def (t1stats, t2stats) = statsProcessorAggregator.processStats(team1Data, team2Data)
 
         return [
