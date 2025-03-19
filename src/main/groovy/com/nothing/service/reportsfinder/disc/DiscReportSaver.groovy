@@ -12,7 +12,8 @@ import com.nothing.service.reportsfinder.interfaces.ReportSaver
 
     @Override void save(List<List<Map<String, Tuple2<Metadata, List<Similarity>>>>> clusters) {
         def file = new File(path)
+        def toWrite = [data: clusters]
         file.createNewFile()
-        file.write(jsonMapper.writeValueAsString(clusters))
+        file.write(jsonMapper.writeValueAsString(toWrite))
     }
 }
