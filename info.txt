@@ -1,0 +1,1 @@
+docker run --init --network host -v "D:\CF1\data50:/dolos" ghcr.io/dodona-edu/dolos-cli -l cpp -f csv -k 15 *.txt
