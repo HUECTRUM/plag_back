@@ -22,6 +22,7 @@ import javax.annotation.PostConstruct
     void runOne(List files) {
         def report = filesParser.processReport(files[0], files[1], files[2])
         def clusters = clustering.getClusters(report)
+        clusters.findAll{ it.size() > 1 }.each { log.info("Cluster sz {}", it.size()) }
         reportSaver.save(clusters)
     }
 
