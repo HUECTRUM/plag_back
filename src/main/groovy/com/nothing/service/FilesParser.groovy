@@ -44,7 +44,7 @@ import com.opencsv.CSVReader
         def rootNode = jsonMapper.readTree(fileReader.readLines().join('')) as ArrayNode
         (0..<rootNode.size()).collectEntries {
             def ch = rootNode.get(it)
-            [ch['s'], ch['a']]
+            [ch['s'].textValue(), ch['a'].textValue()]
         }
     }
 }
