@@ -26,7 +26,7 @@ import com.nothing.service.reportsfinder.interfaces.SubmissionsClustering
 
         List result = []
         idClusters
-                .findAll { it.size() > 1 }
+                .findAll { it.size() > 0 }
                 .each { dsuCluster ->
                     def map = dsuCluster.collectEntries { id ->
                         [id, new Tuple2(metadata[id as String], dsu.data[id])]
