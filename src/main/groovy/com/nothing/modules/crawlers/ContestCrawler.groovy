@@ -46,7 +46,7 @@ import javax.annotation.PostConstruct
                 if (!submissionRepository.exists(latestName, sub.probId, sub.id)) {
                     log.info("Saving code for problem ${sub.probId} sid ${sub.id}")
 
-                    def code = submissionFetcher.fetchCode(latestName, sub.probId, sub.id)
+                    def code = submissionFetcher.fetchCode(latestName, sub.probId, sub.id, sub.additionalInfo)
                     submissionRepository.save(latestName, sub.probId, sub.id, code)
                 }
             }
