@@ -1,0 +1,22 @@
+package com.nothing.modules.crawlers.leetcode
+
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.nothing.helper.annotations.springcomponents.InjectableService
+import com.nothing.modules.crawlers.api.RankingRepository
+import com.nothing.modules.crawlers.api.data.UserStanding
+
+import static groovy.json.JsonOutput.toJson
+
+@InjectableService class LCRankingRepository implements RankingRepository {
+    private static final def mapper = new ObjectMapper()
+    private static def path = { id -> "D:\\scrapper\\LC\\contest-ranking-${id}" }
+
+    @Override
+    List<UserStanding> getByContestId(String id) {
+        def file = new File(path(id))
+        file.exists() ? mapper.readValue(file.text, new TypeReference<List<UserStanding>>(){}) : null
+    }
+
+    @Override void save(String cId, List<UserStanding> data) { new File(path(cId)).write(toJson(data)) }
+}

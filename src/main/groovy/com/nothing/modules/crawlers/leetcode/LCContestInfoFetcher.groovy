@@ -3,8 +3,8 @@ package com.nothing.modules.crawlers.leetcode
 
 import com.nothing.helper.annotations.springcomponents.InjectableService
 import com.nothing.modules.crawlers.api.ContestInfoFetcher
-import com.nothing.modules.crawlers.api.ContestMetadata
-import com.nothing.modules.crawlers.api.ProblemMetadata
+import com.nothing.modules.crawlers.api.data.ContestMetadata
+import com.nothing.modules.crawlers.api.data.ProblemMetadata
 import org.springframework.web.reactive.function.client.WebClient
 
 @InjectableService class LCContestInfoFetcher implements ContestInfoFetcher {

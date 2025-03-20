@@ -1,7 +1,8 @@
 package com.nothing.modules.crawlers.api
 
+import com.nothing.modules.crawlers.api.data.ContestMetadata
+
 interface ContestInfoRepository {
-    String getLastId()
     ContestMetadata getById(String id)
     void save(ContestMetadata data)
 }
