@@ -37,7 +37,7 @@ class HttpExtension {
                         .bodyToMono(String.class)
                         .map(internalSlurper::parseText)
                         .block()
-            } catch(Exception ignored) {
+            } catch (Exception ignored) {
                 getLogger(HttpExtension).warn("Request failed, retry $retry")
 
                 sleep(expBackoff[retryIdx] * 1000)
