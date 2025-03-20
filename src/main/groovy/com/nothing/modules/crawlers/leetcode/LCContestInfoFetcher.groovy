@@ -9,18 +9,19 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @InjectableService class LCContestInfoFetcher implements ContestInfoFetcher {
     private static final def mapper = new ObjectMapper()
+    private static def path = 'D:\\scrapper\\LC\\contest-info'
 
     public final WebClient lcHttpClient
 
-    @Override boolean newContest() { return false }
+    @Override boolean newContest() { false }
 
     @Override ContestMetadata fetchLatest() {
         def latestName = latestName()
         parseResponse(latestName, requestContestInfo(latestName))
     }
 
-    private static def path = 'D:\\scrapper\\LC\\contest-info'
     @Override ContestMetadata fetchExisting() { mapper.readValue(new File(path).text, ContestMetadata) }
+
 
     ContestMetadata parseResponse(id, response) {
         def problems = response.questions.collect {
