@@ -27,5 +27,4 @@ import javax.annotation.PostConstruct
         reportSaver.save(clusters)
     }
 
-    //@PostConstruct void go() { run() }
 }
