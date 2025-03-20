@@ -1,6 +1,6 @@
 package com.nothing
 
-import com.nothing.annotations.ApplicationStarter
+import com.nothing.helper.annotations.ApplicationStarter
 
 import static org.springframework.boot.SpringApplication.run
 

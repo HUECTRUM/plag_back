@@ -1,0 +1,16 @@
+package com.nothing.modules.crawlers.leetcode
+
+
+import com.nothing.helper.utils.WebClientUtils
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.web.reactive.function.client.WebClient
+
+@Configuration class LCWebClient {
+    static def LC_WEB_API_URL = 'https://leetcode.com/contest/api/'
+
+    @Bean WebClient lcHttpClient() { WebClientUtils.buildWebClient(LC_WEB_API_URL, [
+            'User-Agent': "Mediapartners-Google",
+            "Referrer-Policy": "strict-origin-when-cross-origin",
+    ]) }
+}
