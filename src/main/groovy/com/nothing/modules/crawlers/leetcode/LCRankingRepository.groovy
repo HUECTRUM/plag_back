@@ -18,5 +18,7 @@ import static groovy.json.JsonOutput.toJson
         file.exists() ? mapper.readValue(file.text, new TypeReference<List<UserStanding>>(){}) : null
     }
 
-    @Override void save(String cId, List<UserStanding> data) { new File(path(cId)).write(toJson(data)) }
+    @Override void save(String cId, List<UserStanding> data) {
+        new File(path(cId)).newWriter().withWriter { it << toJson(data) }
+    }
 }

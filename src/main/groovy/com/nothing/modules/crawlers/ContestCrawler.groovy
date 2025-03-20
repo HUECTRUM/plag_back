@@ -8,6 +8,8 @@ import com.nothing.modules.crawlers.api.RankingRepository
 import com.nothing.modules.crawlers.api.data.ContestMetadata
 import com.nothing.modules.crawlers.api.data.UserStanding
 
+import javax.annotation.PostConstruct
+
 @InjectableService class ContestCrawler {
     public final ContestInfoFetcher contestInfoFetcher
     public final ContestInfoRepository contestInfoRepository
@@ -30,6 +32,9 @@ import com.nothing.modules.crawlers.api.data.UserStanding
         if (standings == null) {
             log.info("Fetching new rankings for ${latestName}")
             standings = rankingFetcher.fetchNew(latestName)
+            rankingRepository.save(latestName, standings)
         }
     }
+
+    @PostConstruct void go() { runCrawler() }
 }

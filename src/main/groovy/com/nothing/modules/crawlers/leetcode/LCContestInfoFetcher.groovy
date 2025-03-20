@@ -23,6 +23,6 @@ import org.springframework.web.reactive.function.client.WebClient
     }
 
     def requestContestInfo(String id) {
-        lcHttpClient.blockingGetWHeader("info/${id}/", 'referer', "https://leetcode.com/contest/${id}/ranking/")
+        lcHttpClient.blockingGetWHeader("info/${id}/", 'referer', "https://leetcode.com/contest/${id}/ranking/", 10)
     }
 }

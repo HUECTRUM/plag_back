@@ -16,5 +16,5 @@ import static groovy.json.JsonOutput.toJson
         file.exists() ? mapper.readValue(file.text, ContestMetadata) : null
     }
 
-    @Override void save(ContestMetadata data) { new File(path).write(toJson(data)) }
+    @Override void save(ContestMetadata data) { new File(path).newWriter().withWriter { it << toJson(data) } }
 }
