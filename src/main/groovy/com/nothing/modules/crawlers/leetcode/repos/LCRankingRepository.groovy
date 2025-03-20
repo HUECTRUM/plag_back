@@ -1,9 +1,9 @@
-package com.nothing.modules.crawlers.leetcode
+package com.nothing.modules.crawlers.leetcode.repos
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.nothing.helper.annotations.springcomponents.InjectableService
-import com.nothing.modules.crawlers.api.RankingRepository
+import com.nothing.modules.crawlers.api.repos.RankingRepository
 import com.nothing.modules.crawlers.api.data.UserStanding
 
 import static groovy.json.JsonOutput.toJson

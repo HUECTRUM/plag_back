@@ -18,7 +18,7 @@ import org.springframework.web.reactive.function.client.WebClient
             def uname = userResponse.username
             def userSubmissions = userResponse.submissions.collect { subEntry ->
                 [id: subEntry.value.submission_id, probId: subEntry.key,
-                 author: uname, language: subEntry.value.lang, ] as Submission
+                 author: uname, language: subEntry.value.lang, additionalInfo:[userResponse.data_region]] as Submission
             }
             [id: uname, name: uname, rank: userResponse.rank as int, submissions: userSubmissions] as UserStanding
         }

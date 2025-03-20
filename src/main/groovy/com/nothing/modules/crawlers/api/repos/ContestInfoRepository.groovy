@@ -1,4 +1,4 @@
-package com.nothing.modules.crawlers.api
+package com.nothing.modules.crawlers.api.repos
 
 import com.nothing.modules.crawlers.api.data.ContestMetadata
 

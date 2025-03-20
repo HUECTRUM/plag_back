@@ -2,11 +2,13 @@ package com.nothing.modules.crawlers
 
 import com.nothing.helper.annotations.springcomponents.InjectableService
 import com.nothing.modules.crawlers.api.ContestInfoFetcher
-import com.nothing.modules.crawlers.api.ContestInfoRepository
+import com.nothing.modules.crawlers.api.SubmissionFetcher
+import com.nothing.modules.crawlers.api.repos.ContestInfoRepository
 import com.nothing.modules.crawlers.api.RankingFetcher
-import com.nothing.modules.crawlers.api.RankingRepository
+import com.nothing.modules.crawlers.api.repos.RankingRepository
 import com.nothing.modules.crawlers.api.data.ContestMetadata
 import com.nothing.modules.crawlers.api.data.UserStanding
+import com.nothing.modules.crawlers.api.repos.SubmissionRepository
 
 import javax.annotation.PostConstruct
 
@@ -15,6 +17,8 @@ import javax.annotation.PostConstruct
     public final ContestInfoRepository contestInfoRepository
     public final RankingRepository rankingRepository
     public final RankingFetcher rankingFetcher
+    public final SubmissionRepository submissionRepository
+    public final SubmissionFetcher submissionFetcher
 
     void runCrawler() {
         def latestName = contestInfoFetcher.latestName()
@@ -33,6 +37,19 @@ import javax.annotation.PostConstruct
             log.info("Fetching new rankings for ${latestName}")
             standings = rankingFetcher.fetchNew(latestName)
             rankingRepository.save(latestName, standings)
+        }
+
+        standings.each { standing ->
+            log.info("Processing user ${standing.name} rank ${standing.rank}")
+
+            standing.submissions.each { sub ->
+                if (!submissionRepository.exists(latestName, sub.probId, sub.id)) {
+                    log.info("Saving code for problem ${sub.probId} sid ${sub.id}")
+
+                    def code = submissionFetcher.fetchCode(latestName, sub.probId, sub.id)
+                    submissionRepository.save(latestName, sub.probId, sub.id, code)
+                }
+            }
         }
     }
 
