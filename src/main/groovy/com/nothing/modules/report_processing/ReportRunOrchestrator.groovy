@@ -31,6 +31,4 @@ import javax.annotation.PostConstruct
         clusters.findAll{ it.size() > 1 }.each { log.info("Cluster sz {}", it.size()) }
         reportSaver.save(clusters)
     }
-
-    @PostConstruct void go() { run() }
 }
