@@ -3,13 +3,14 @@ package com.nothing.modules.report_processing.service
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.nothing.helper.annotations.springcomponents.InjectableService
+import com.nothing.modules.report_processing.data.Metadata
 import com.nothing.modules.report_processing.data.Pair
 import com.opencsv.CSVReader
 
 @InjectableService class FilesParser {
     private static final def jsonMapper = new ObjectMapper()
 
-    Tuple2<List<Pair>, Map<String, com.nothing.modules.report_processing.data.Metadata>> processReport(CSVReader pairsR, CSVReader filesR, FileReader metadataR) {
+    Tuple2<List<Pair>, Map<String, Metadata>> processReport(CSVReader pairsR, CSVReader filesR, FileReader metadataR) {
         def pairsD = readCsv(pairsR), filesD = readCsv(filesR)
         def metaD = readMetadata(metadataR)
 
@@ -23,7 +24,7 @@ import com.opencsv.CSVReader
             def sId = it.path.split('\\.')[0]
 
             [it. id, [id: it.id, fileName: it.path, sourceCode: it.content,
-                      author: metaD[sId], submissionId: sId] as com.nothing.modules.report_processing.data.Metadata]
+                      author: metaD[sId], submissionId: sId] as Metadata]
         }
 
         Tuple.tuple(parsedPairs, parsedMetadata)
