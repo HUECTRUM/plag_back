@@ -13,6 +13,8 @@ import com.nothing.modules.crawlers.api.repos.SubmissionRepository
 import javax.annotation.PostConstruct
 
 @InjectableService class ContestCrawler {
+    private static final def rankLimit = 2000
+
     public final ContestInfoFetcher contestInfoFetcher
     public final ContestInfoRepository contestInfoRepository
     public final RankingRepository rankingRepository
@@ -39,19 +41,19 @@ import javax.annotation.PostConstruct
             rankingRepository.save(latestName, standings)
         }
 
-        standings.each { standing ->
-            log.info("Processing user ${standing.name} rank ${standing.rank}")
+        standings
+                .findAll { standing -> standing.rank <= rankLimit }
+                .each { standing ->
+                    log.info("Processing user ${standing.name} rank ${standing.rank}")
 
-            standing.submissions.each { sub ->
-                if (!submissionRepository.exists(latestName, sub.probId, sub.id)) {
-                    log.info("Saving code for problem ${sub.probId} sid ${sub.id}")
+                    standing.submissions.each { sub ->
+                        if (!submissionRepository.exists(latestName, sub.probId, sub.id)) {
+                            log.info("Saving code for problem ${sub.probId} sid ${sub.id}")
 
-                    def code = submissionFetcher.fetchCode(latestName, sub.probId, sub.id, sub.additionalInfo)
-                    submissionRepository.save(latestName, sub.probId, sub.id, code)
+                            def code = submissionFetcher.fetchCode(latestName, sub.probId, sub.id, sub.additionalInfo)
+                            submissionRepository.save(latestName, sub.probId, sub.id, code)
+                        }
+                    }
                 }
-            }
-        }
     }
-
-    @PostConstruct void go() { runCrawler() }
 }
