@@ -15,7 +15,6 @@ import com.opencsv.CSVReader
             [
                     new CSVReader(new FileReader("$absPath/pairs.csv")),
                     new CSVReader(new FileReader("$absPath/files.csv")),
-                    new FileReader("$absPath/metadata.json")
             ]
         }
     }
