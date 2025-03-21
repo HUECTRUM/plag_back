@@ -8,7 +8,7 @@ import com.nothing.modules.report_processing.data.Similarity
 import com.nothing.modules.report_processing.service.reportsfinder.interfaces.SubmissionsClustering
 
 @InjectableService class DSUClustering implements SubmissionsClustering {
-    private static double threshold = 0.7
+    private static double threshold = 0.85
 
     @Override
     List<Map<String, Tuple2<Metadata, List<Similarity>>>> getClusters(Tuple2<List<Pair>, Map<String, Metadata>> data) {

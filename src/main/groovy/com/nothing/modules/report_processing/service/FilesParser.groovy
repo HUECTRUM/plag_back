@@ -35,7 +35,9 @@ import com.opencsv.CSVReader
         List<Map<String, String>> allElements = new LinkedList<>()
         String[] headers = reader.readNext()
 
+        int i = -1
         while (reader.hasNext) {
+            i += 1
             String[] nextLineAsTokens = reader.readNext()
             if (nextLineAsTokens != null) {
                 allElements.add(new HashMap<>())
