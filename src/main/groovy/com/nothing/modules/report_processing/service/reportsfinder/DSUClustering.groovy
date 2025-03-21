@@ -14,19 +14,16 @@ import com.nothing.modules.report_processing.service.reportsfinder.interfaces.Su
     List<Map<String, Tuple2<Metadata, List<Similarity>>>> getClusters(Tuple2<List<Pair>, Map<String, Metadata>> data) {
         def (pairs, metadata) = data
 
-        log.info("4")
         DSU dsu = new DSU(metadata.size())
         pairs.findAll { inCluster(it) }.each {
             def similarities = attachments(it)
             dsu.unite(it.lId as int, it.rId as int, similarities[0], similarities[1])
         }
 
-        log.info("5")
         List<List<String>> idClusters = new ArrayList<>()
         (0..<metadata.size()).each { idClusters.add(new ArrayList<>()) }
         (0..<metadata.size()).each { idClusters[dsu.find(it)].add(it) }
 
-        log.info("6")
         List result = []
         idClusters
                 .findAll { it.size() > 0 }
@@ -37,7 +34,6 @@ import com.nothing.modules.report_processing.service.reportsfinder.interfaces.Su
                     result += map
                 }
 
-        log.info("7")
         return result
     }
 
