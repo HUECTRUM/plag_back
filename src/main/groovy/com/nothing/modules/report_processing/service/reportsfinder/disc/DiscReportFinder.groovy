@@ -3,9 +3,10 @@ package com.nothing.modules.report_processing.service.reportsfinder.disc
 import com.nothing.helper.annotations.springcomponents.InjectableService
 import com.nothing.modules.report_processing.service.reportsfinder.interfaces.ReportsFinder
 import com.opencsv.CSVReader
+import org.springframework.beans.factory.annotation.Value
 
 @InjectableService class DiscReportFinder implements ReportsFinder {
-    static final def folder = "D:\\CF1\\be_reports"
+    @Value("${finder.folder}") String folder
 
     @Override List<List> filesToProcess() {
         def folders = new File(folder).listFiles()

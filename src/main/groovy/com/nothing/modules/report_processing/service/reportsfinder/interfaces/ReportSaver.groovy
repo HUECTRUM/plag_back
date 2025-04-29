@@ -5,5 +5,5 @@ import com.nothing.modules.report_processing.data.Metadata
 import com.nothing.modules.report_processing.data.Similarity
 
 interface ReportSaver {
-    void save(List<List<Map<String, Tuple2<Metadata, List<Similarity>>>>> clusters)
+    void save(String key, List<List<Map<String, Tuple2<Metadata, List<Similarity>>>>> clusters)
 }

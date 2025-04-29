@@ -25,6 +25,7 @@ dependencies {
     implementation group: 'org.javacord', name: 'javacord-api', version: '3.3.2'
     implementation 'com.opencsv:opencsv:5.10'
     implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.29.0'
+    implementation 'software.amazon.awssdk:s3:2.31.30'
 
     runtimeOnly group: 'org.javacord', name: 'javacord-core', version: '3.3.2'
 

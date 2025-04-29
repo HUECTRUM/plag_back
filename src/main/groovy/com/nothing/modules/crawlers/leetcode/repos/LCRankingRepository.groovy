@@ -5,12 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.nothing.helper.annotations.springcomponents.InjectableService
 import com.nothing.modules.crawlers.api.repos.RankingRepository
 import com.nothing.modules.crawlers.api.data.UserStanding
+import org.springframework.beans.factory.annotation.Value
 
 import static groovy.json.JsonOutput.toJson
 
 @InjectableService class LCRankingRepository implements RankingRepository {
     private static final def mapper = new ObjectMapper()
-    private static def path = { id -> "D:\\scrapper\\LC\\contest-ranking-${id}" }
+
+    @Value("${contestRepo.path}") String rankingPath
+
+    private static def path = { id -> "$rankingPath-$id" }
 
     @Override
     List<UserStanding> getByContestId(String id) {
