@@ -8,9 +8,9 @@ import static com.nothing.modules.endpoints.utils.ResourceUtils.resource
 @InjectableService class ReportService {
     private static final def slurper = new JsonSlurper()
 
-    def buildFinalReports() {
+    def buildFinalReports(String cname) {
         def problems = []
-        resource('reports/LC-weekly-contest-441').listFiles().each { probFolder ->
+        resource("reports/$cname").listFiles().each { probFolder ->
             def files = probFolder.listFiles()
 
             def probF = files.find { it.name.contains('prob') }, reportF = files.find { it.name.contains('report') }

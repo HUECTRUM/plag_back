@@ -1,0 +1,1 @@
+Download contest submissions and check for similarity
